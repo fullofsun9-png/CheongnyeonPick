@@ -1,0 +1,6 @@
+{
+  "name": "청년픽 NEXT",
+  "description": "내 조건에 맞는 청년 정책을 찾고, 생활변화 비교와 신청 준비까지 한 번에 관리하는 청년 정책 보드",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

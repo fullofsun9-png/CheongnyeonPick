@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>청년픽 NEXT | UI 시제품 v2</title>
+<style>
+:root{
+  --navy:#15213d; --blue:#2868f5; --blue2:#4b86ff; --sky:#edf4ff;
+  --ink:#172033; --muted:#718096; --line:#e8edf4; --bg:#f4f6fa;
+  --green:#15956b; --greenbg:#e8f7f1; --amber:#b87517; --amberbg:#fff5e5;
+  --red:#d34d56; --redbg:#fff0f1; --white:#fff; --shadow:0 12px 38px rgba(23,40,75,.10);
+}
+*{box-sizing:border-box} html,body{margin:0;min-height:100%;background:#e9edf3;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Apple SD Gothic Neo",sans-serif}
+button,input{font:inherit} button{cursor:pointer}
+.stage{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.device{width:430px;height:min(920px,calc(100vh - 48px));min-height:680px;background:var(--bg);border:8px solid #172033;border-radius:36px;overflow:hidden;box-shadow:0 28px 70px rgba(13,26,51,.25);position:relative;display:flex;flex-direction:column}
+.statusbar{height:25px;flex:none;background:white;padding:5px 20px 0;display:flex;justify-content:space-between;font-size:10px;font-weight:700;color:#596273;letter-spacing:.1px}
+.topbar{background:#fff;padding:13px 20px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f0f2f6;flex:none}
+.brand{display:flex;align-items:center;gap:9px;font-weight:900;color:var(--navy);font-size:19px;letter-spacing:-.8px}.brandmark{height:29px;width:29px;border-radius:10px;background:linear-gradient(140deg,#3677ff,#1f5ce8);color:white;display:grid;place-items:center;font-weight:900;font-size:16px;box-shadow:0 5px 12px #2868f52c}
+.header-actions{display:flex;gap:8px;align-items:center}.iconbtn{width:34px;height:34px;border:0;background:#f4f6fa;border-radius:12px;color:#516078;font-size:16px}.scroll{overflow:auto;flex:1;padding:18px 18px 102px;scrollbar-width:thin;scrollbar-color:#d3dbe8 transparent}.scroll::-webkit-scrollbar{width:4px}.scroll::-webkit-scrollbar-thumb{background:#d3dbe8;border-radius:5px}
+.greet{font-size:13px;color:var(--muted);margin:0 0 5px}.headline{font-size:23px;line-height:1.32;font-weight:900;letter-spacing:-1px;color:var(--navy);margin:0 0 13px}.headline em{font-style:normal;color:var(--blue)}
+.profile-strip{background:linear-gradient(110deg,#eaf2ff,#f3f8ff);border:1px solid #dce8ff;border-radius:17px;padding:13px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.profile-left{display:flex;align-items:center;gap:10px;min-width:0}.avatar{width:37px;height:37px;border-radius:13px;background:#d6e5ff;color:#2868f5;display:grid;place-items:center;font-size:20px;flex:none}.profile-txt strong{display:block;font-size:13px;color:#213b68}.profile-txt span{display:block;font-size:11px;color:#657b9e;margin-top:3px}.editlink{border:0;background:transparent;color:#2868f5;font-size:11px;font-weight:800;white-space:nowrap;padding:7px 0}
+.searchbox{height:47px;background:white;border:1px solid var(--line);border-radius:14px;display:flex;align-items:center;padding:0 14px;gap:9px;box-shadow:0 2px 8px rgba(25,45,80,.03);margin-bottom:16px}.searchbox span{font-size:17px;color:#7d8aa0}.searchbox input{border:0;outline:0;min-width:0;flex:1;font-size:13px;color:var(--ink);background:transparent}.searchbox input::placeholder{color:#a1aaba}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:19px 1px 10px}.section-head h2{margin:0;font-size:16px;color:var(--navy);letter-spacing:-.4px}.section-head button{border:0;background:none;color:var(--blue);font-weight:800;font-size:11px;padding:4px}
+.mini-status{background:white;border:1px solid var(--line);border-radius:17px;padding:13px 14px;margin-bottom:15px}.status-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.status-top strong{font-size:13px}.demo-tag{font-size:9px;color:#74839b;background:#f1f4f8;padding:4px 7px;border-radius:7px;font-weight:800}.status-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.status-cell{background:#f7f9fc;border-radius:12px;padding:9px 8px}.status-cell b{font-size:20px;display:block;color:var(--navy);letter-spacing:-.7px}.status-cell span{font-size:10px;color:var(--muted);display:block;margin-top:2px}.status-cell.blue b{color:var(--blue)}.status-cell.amber b{color:#c18425}
+.chips{display:flex;gap:7px;overflow:auto;padding:1px 0 5px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}.chip{border:1px solid #e4e9f1;border-radius:30px;background:white;color:#66748b;padding:7px 12px;font-size:11px;white-space:nowrap;font-weight:700}.chip.active{background:#1d2d4e;border-color:#1d2d4e;color:white}
+.policy-card{background:white;border:1px solid var(--line);border-radius:17px;padding:14px;margin-bottom:10px;box-shadow:0 3px 10px rgba(22,39,70,.025)}.policy-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.category{font-size:10px;font-weight:800;color:#6d7b90}.state{font-size:10px;border-radius:7px;padding:5px 8px;font-weight:900;white-space:nowrap}.state.good{color:var(--green);background:var(--greenbg)}.state.check{color:var(--amber);background:var(--amberbg)}.state.no{color:var(--red);background:var(--redbg)}.policy-card h3{margin:0 0 6px;font-size:15px;color:var(--navy);letter-spacing:-.4px}.policy-card p{font-size:11px;color:#78859a;margin:0 0 10px;line-height:1.5}.reason{font-size:11px;color:#44536d;background:#f6f8fb;padding:9px 10px;border-radius:10px;line-height:1.5}.reason b{color:var(--blue)}.card-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:10px}.card-bottom small{font-size:10px;color:#8b96a8}.arrowbtn{border:0;border-radius:10px;background:#edf3ff;color:var(--blue);font-weight:900;font-size:11px;padding:8px 11px}
+.info-note{display:flex;gap:8px;align-items:flex-start;background:#f0f6ff;border:1px solid #dfebff;border-radius:13px;padding:11px 12px;color:#5f7190;font-size:10px;line-height:1.55;margin:12px 0}.info-note b{color:#315fba}
+.bottomnav{position:absolute;bottom:0;left:0;right:0;background:rgba(255,255,255,.97);border-top:1px solid #e9edf3;display:grid;grid-template-columns:repeat(5,1fr);padding:9px 6px 10px;z-index:10;backdrop-filter:blur(10px)}.navitem{border:0;background:transparent;color:#98a2b2;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:9px;font-weight:700;padding:3px 0}.navitem .navicon{font-size:18px;line-height:1}.navitem.active{color:var(--blue)}.navitem.active .navicon{filter:drop-shadow(0 3px 4px #2868f533)}
+.page-title{font-size:21px;font-weight:900;color:var(--navy);letter-spacing:-.8px;margin:1px 0 4px}.page-sub{font-size:11px;color:#8290a4;margin:0 0 15px}.filterbar{display:flex;justify-content:space-between;align-items:center;margin:13px 0 9px}.filterbar span{font-size:11px;color:#8490a2}.filterbar button{border:0;background:white;border-radius:9px;padding:7px 10px;color:#5e6c82;font-weight:700;font-size:10px}
+.detail-hero{background:linear-gradient(145deg,#1d3157,#2a5fc0);border-radius:19px;padding:17px;color:#fff;margin-bottom:14px;box-shadow:0 8px 18px rgba(39,90,186,.14)}.detail-hero .category{color:#c5d7ff}.detail-hero h2{font-size:20px;line-height:1.35;margin:10px 0 7px;letter-spacing:-.6px}.detail-hero p{font-size:11px;color:#d6e1f6;margin:0 0 12px}.hero-meta{display:flex;gap:6px;flex-wrap:wrap}.hero-meta span{background:#ffffff1d;border:1px solid #ffffff20;padding:6px 8px;border-radius:8px;font-size:10px;color:#f2f6ff}.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:11px}.panel h3{font-size:14px;color:var(--navy);margin:0 0 11px}.eligibility{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-top:1px solid #f0f2f6;gap:10px}.eligibility:first-of-type{border-top:0;padding-top:0}.eligibility strong{display:block;font-size:12px}.eligibility small{font-size:10px;color:#8b96a7;display:block;margin-top:3px;line-height:1.4}.sourcebox{background:#f7f9fc;border-radius:11px;padding:10px;margin-top:8px}.sourcebox b{font-size:10px;color:#44536b}.sourcebox p{margin:5px 0 0;font-size:10px;color:#7e8ba0;line-height:1.45}.primary{width:100%;border:0;border-radius:13px;background:var(--blue);color:white;font-size:13px;font-weight:900;padding:14px;box-shadow:0 7px 16px #2868f52a}.secondary{width:100%;border:1px solid #dce5f3;border-radius:13px;background:white;color:#34517d;font-size:12px;font-weight:800;padding:12px;margin-top:8px}
+.scenario-box{background:white;border:1px solid var(--line);border-radius:16px;padding:13px;margin-bottom:12px}.scenario-box label{display:block;color:#718099;font-size:10px;font-weight:800;margin-bottom:7px}.scenario-options{display:flex;gap:7px}.scenario-options button{flex:1;border:1px solid #e0e7f1;background:#fff;color:#718099;border-radius:10px;padding:10px 7px;font-size:11px;font-weight:800}.scenario-options button.active{background:#edf3ff;border-color:#a9c5ff;color:#2868f5}.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:11px}.compare-col{background:#fff;border:1px solid var(--line);border-radius:15px;padding:12px}.compare-col.after{border-color:#c9dcff;background:#fafdff}.compare-col .kicker{font-size:10px;color:#8a96a7;font-weight:900}.compare-col h3{font-size:13px;color:var(--navy);margin:6px 0 9px}.condition{padding:8px 0;border-top:1px solid #edf0f4}.condition:first-of-type{border-top:0}.condition b{display:block;font-size:10px}.condition span{display:block;font-size:10px;color:#7f8ba0;margin-top:3px;line-height:1.45}.task{display:flex;align-items:flex-start;gap:10px;padding:11px 0;border-top:1px solid #eef1f5}.task:first-of-type{border-top:0;padding-top:0}.task input{accent-color:var(--blue);width:17px;height:17px;margin:1px 0 0;flex:none}.task label{flex:1;cursor:pointer}.task strong{display:block;font-size:12px}.task small{display:block;color:#8490a3;font-size:10px;line-height:1.4;margin-top:4px}.taskstate{font-size:9px;font-weight:900;border-radius:7px;padding:5px 7px;background:#f1f4f8;color:#77849a;white-space:nowrap}.taskstate.done{background:var(--greenbg);color:var(--green)}.taskstate.progress{background:var(--amberbg);color:var(--amber)}
+.profile-row{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-top:1px solid #eff2f6}.profile-row:first-of-type{border-top:0}.profile-row span{font-size:11px;color:#8793a5}.profile-row strong{font-size:12px;color:#263650;text-align:right}.field{width:100%;border:1px solid #e0e7f0;border-radius:10px;padding:10px;font-size:12px;color:#263650;background:#fbfcfe;margin-top:6px;outline-color:#8db2ff}.fieldlabel{display:block;font-size:10px;color:#718099;font-weight:800;margin:9px 0}
+.blank-state{padding:18px 10px;text-align:center;color:#8995a7;font-size:11px;background:#fff;border:1px dashed #d9e1ec;border-radius:14px}
+.toast{position:absolute;left:50%;bottom:78px;transform:translateX(-50%);background:#1b2a45;color:#fff;padding:10px 14px;border-radius:12px;font-size:11px;box-shadow:var(--shadow);z-index:20;opacity:0;pointer-events:none;transition:opacity .2s;white-space:nowrap}.toast.show{opacity:1}
+@media(max-width:520px){.stage{padding:0;background:var(--bg)}.device{width:100%;height:100dvh;min-height:0;border:0;border-radius:0;box-shadow:none}.statusbar{padding-top:5px}.topbar{padding-left:18px;padding-right:18px}}
+@media(min-width:900px){.stage:before{content:"청년픽 NEXT · 클릭 가능한 UI 시제품";position:fixed;top:28px;left:36px;font-size:13px;font-weight:800;color:#52627b;letter-spacing:-.2px}.stage:after{content:"홈의 현황 카드를 눌러 이동하고, 생활변화·전자지갑·다운로드 기능을 시험해 보세요.";position:fixed;bottom:26px;left:36px;font-size:11px;color:#7e8ba0}}
+
+.status-link{border:0;text-align:left;width:100%;cursor:pointer;transition:transform .15s,box-shadow .15s}.status-link:active{transform:scale(.98)}.status-link small{display:block;font-size:9px;font-weight:900;color:#2868f5;margin-top:6px}
+.route-card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:14px;margin-bottom:12px}.route-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.route-title strong{font-size:13px;color:var(--navy)}.route-title span{font-size:9px;color:#8290a4;background:#f4f6fa;border-radius:7px;padding:5px 7px}.route-row{display:grid;grid-template-columns:25px 1fr;gap:9px;align-items:stretch}.route-rail{display:flex;flex-direction:column;align-items:center}.route-dot{width:12px;height:12px;border-radius:50%;border:3px solid #2868f5;background:white;margin-top:4px;z-index:1}.route-dot.end{border-color:#ff8a42}.route-line{width:2px;flex:1;min-height:28px;background:linear-gradient(#9bbcff,#ffbf8a);margin:3px 0}.route-content{padding-bottom:10px}.route-content.end{padding-bottom:0}.route-kicker{font-size:9px;font-weight:900;color:#8190a7;margin-bottom:5px}.route-field{width:100%;border:1px solid #e0e7f0;border-radius:11px;padding:11px 32px 11px 11px;color:#223451;font-size:11px;font-weight:800;background:#fbfcff;outline-color:#8db2ff}.route-desc{font-size:9px;color:#8793a6;margin-top:5px;line-height:1.4}.route-controls{display:flex;align-items:center;justify-content:space-between;margin-top:4px}.route-swap{border:1px solid #e1e8f3;background:#f6f8fc;color:#48658f;border-radius:10px;padding:7px 10px;font-size:10px;font-weight:900}.route-hint{font-size:9px;color:#8a96a8}.route-result{background:#f4f8ff;border:1px solid #e1ecff;border-radius:13px;padding:12px;margin-bottom:12px}.route-result strong{display:block;color:#20457f;font-size:12px;margin-bottom:4px}.route-result p{font-size:10px;line-height:1.5;color:#657995;margin:0}.diff-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 0;border-top:1px solid #eef1f5}.diff-row:first-child{border-top:0}.diff-row strong{font-size:11px}.diff-row small{display:block;font-size:9px;color:#8793a5;margin-top:3px;line-height:1.4}.diff-pill{flex:none;font-size:9px;font-weight:900;border-radius:7px;padding:5px 7px;background:#fff4e6;color:#b87517}.diff-pill.same{background:#e8f7f1;color:#15956b}
+.wallet-panel{background:linear-gradient(135deg,#f2f7ff,#fff);border:1px solid #dce8fb;border-radius:17px;padding:13px;margin-bottom:12px}.wallet-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}.wallet-head strong{font-size:13px;color:#1d3157}.wallet-head span{font-size:9px;color:#2868f5;font-weight:900;background:#e8f1ff;border-radius:7px;padding:5px 7px}.wallet-empty{background:#fff;border:1px dashed #d7e1f0;border-radius:11px;text-align:center;padding:13px;color:#8794a8;font-size:10px;line-height:1.5}.wallet-file{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid #e8edf5;border-radius:11px;padding:9px;margin-top:7px}.file-icon{width:30px;height:34px;border-radius:8px;background:#edf4ff;color:#2868f5;display:grid;place-items:center;font-size:15px;flex:none}.file-meta{flex:1;min-width:0}.file-meta strong{display:block;font-size:10px;color:#2b3d5a;line-height:1.35}.file-meta small{display:block;font-size:9px;color:#8a96a8;margin-top:3px}.file-action{border:0;border-radius:8px;background:#edf3ff;color:#2868f5;padding:7px 8px;font-size:9px;font-weight:900;white-space:nowrap}.task-doc{display:flex;align-items:center;gap:8px;background:#f8faff;border:1px solid #e8eef8;border-radius:10px;padding:8px;margin:8px 0 0 27px}.task-doc .file-icon{width:25px;height:29px;font-size:12px}.task-doc .file-meta strong{font-size:9px}.doc-actions{display:flex;gap:5px}.doc-actions button{border:0;border-radius:7px;padding:6px 7px;font-size:8px;font-weight:900;white-space:nowrap}.save-file{background:#e8f1ff;color:#2868f5}.download-file{background:#1f63ef;color:white}.wallet-sub{font-size:9px;color:#7d8ba1;line-height:1.5;margin:5px 0 0}
+
+</style>
+</head>
+<body>
+<div class="stage">
+  <main class="device" aria-label="청년픽 NEXT 시제품">
+    <div class="statusbar"><span>9:41  ◉  ◉</span><span>●●●  5G  ▰</span></div>
+    <header class="topbar">
+      <div class="brand"><span class="brandmark">N</span>청년픽 NEXT</div>
+      <div class="header-actions"><button class="iconbtn" title="알림" onclick="toast('새 알림이 없습니다.')">♧</button><button class="iconbtn" title="프로필" onclick="go('profile')">☺</button></div>
+    </header>
+    <section id="screen" class="scroll" aria-live="polite"></section>
+    <nav class="bottomnav" aria-label="하단 메뉴">
+      <button class="navitem active" data-nav="home" onclick="go('home')"><span class="navicon">⌂</span><span>홈</span></button>
+      <button class="navitem" data-nav="policies" onclick="go('policies')"><span class="navicon">⌕</span><span>정책찾기</span></button>
+      <button class="navitem" data-nav="switch" onclick="go('switch')"><span class="navicon">⇄</span><span>생활변화</span></button>
+      <button class="navitem" data-nav="apply" onclick="go('apply')"><span class="navicon">☑</span><span>준비관리</span></button>
+      <button class="navitem" data-nav="profile" onclick="go('profile')"><span class="navicon">♙</span><span>내 정보</span></button>
+    </nav>
+    <div id="toast" class="toast"></div>
+  </main>
+</div>
+<script>
+const demoProfile={age:'만 23세',address:'경기도',school:'천안 소재 대학 재학',work:'재학 중',interests:['일자리','주거','교육']};
+let current='home', selectedCategory='전체', searchTerm='', completed=new Set([0,1]), walletSaved=new Set([2]);
+let departureState='current', destinationState='graduateMove';
+const policies=[
+ {id:1,title:'청년 주거 지원 정책',cat:'주거',state:'check',stateText:'추가 확인',org:'중앙·지자체 정책 예시',reason:'천안 소재 대학 재학 조건은 확인 대상입니다. 주민등록지 요건과 공고 기준일을 함께 확인해야 합니다.',deadline:'공고별 상이'},
+ {id:2,title:'청년 취업 지원 프로그램',cat:'일자리',state:'good',stateText:'조건 검토 후보',org:'청년 일자리 정책 예시',reason:'연령과 현재 구직 상태에 따라 적용 여부가 달라질 수 있습니다.',deadline:'모집 일정 확인 필요'},
+ {id:3,title:'청년 역량 강화 교육 지원',cat:'교육',state:'check',stateText:'추가 확인',org:'교육·훈련 정책 예시',reason:'재학 여부 및 과거 참여 이력에 대한 확인이 필요합니다.',deadline:'공고별 상이'}
+];
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(window._toastTimer);window._toastTimer=setTimeout(()=>el.classList.remove('show'),2100)}
+function go(page){current=page;render();document.getElementById('screen').scrollTop=0;document.querySelectorAll('.navitem').forEach(b=>b.classList.toggle('active',b.dataset.nav===(page==='detail'?'policies':page)))}
+function card(p){return `<article class="policy-card"><div class="policy-top"><span class="category">${p.org} · ${p.cat}</span><span class="state ${p.state}">${p.stateText}</span></div><h3>${p.title}</h3><p>내 프로필 기준으로 확인할 조건을 정리했어요.</p><div class="reason"><b>나와 관련된 조건</b><br>${p.reason}</div><div class="card-bottom"><small>신청기간: ${p.deadline}</small><button class="arrowbtn" onclick="openDetail(${p.id})">자세히 보기 →</button></div></article>`}
+function home(){return `
+ <p class="greet">안녕하세요, 청년픽이 조건을 확인해볼게요.</p><h1 class="headline">내 상황에 맞는 정책,<br><em>찾는 시간은 줄이고</em> 준비는 쉽게</h1>
+ <div class="profile-strip"><div class="profile-left"><div class="avatar">♙</div><div class="profile-txt"><strong>천안 생활권 프로필</strong><span>경기 거주 · 천안 소재 대학 재학</span></div></div><button class="editlink" onclick="go('profile')">조건 수정 ›</button></div>
+ <div class="searchbox"><span>⌕</span><input aria-label="정책 검색" placeholder="정책명, 관심 분야, 내 상황을 검색해요" onkeydown="if(event.key==='Enter'){searchTerm=this.value;go('policies')}"/><button class="editlink" onclick="searchTerm=this.previousElementSibling.value;go('policies')">검색</button></div>
+ <div class="mini-status"><div class="status-top"><strong>내 정책 확인 현황</strong><span class="demo-tag">시연 데이터</span></div><div class="status-grid"><button class="status-cell status-link blue" onclick="go('policies')"><b>03</b><span>검토 후보</span><small>정책 확인 ›</small></button><button class="status-cell status-link amber" onclick="go('switch')"><b>02</b><span>추가 확인</span><small>생활변화 비교 ›</small></button><button class="status-cell status-link" onclick="go('apply')"><b>01</b><span>준비 중</span><small>준비관리 열기 ›</small></button></div></div>
+ <div class="section-head"><h2>관심 분야</h2><button onclick="go('policies')">전체 보기 ›</button></div>
+ <div class="chips">${['전체','일자리','주거','교육','창업'].map(c=>`<button class="chip ${selectedCategory===c?'active':''}" onclick="selectedCategory='${c}';go('policies')">${c}</button>`).join('')}</div>
+ <div class="section-head"><h2>내게 맞는 정책 후보</h2><button onclick="go('policies')">더 보기 ›</button></div>
+ ${card(policies[0])}${card(policies[1])}
+ <div class="info-note"><span>ⓘ</span><span><b>판정과 설명을 분리합니다.</b><br>자격 상태는 검증된 규칙으로 확인하고, AI는 공고 근거를 이해하기 쉽게 설명합니다.</span></div>`}
+function policiesPage(){let arr=policies.filter(p=>(selectedCategory==='전체'||p.cat===selectedCategory)&&(!searchTerm||(`${p.title}${p.cat}${p.reason}`).includes(searchTerm)));return `
+ <h1 class="page-title">정책 찾기</h1><p class="page-sub">내 조건에 해당하는 정책 후보를 모아봤어요.</p>
+ <div class="searchbox"><span>⌕</span><input id="policySearch" value="${searchTerm}" placeholder="정책명이나 키워드를 입력해요" oninput="searchTerm=this.value;document.getElementById('results').innerHTML=filteredCards()"/><button class="editlink" onclick="searchTerm='';document.getElementById('policySearch').value='';document.getElementById('results').innerHTML=filteredCards()">초기화</button></div>
+ <div class="chips">${['전체','일자리','주거','교육','창업'].map(c=>`<button class="chip ${selectedCategory===c?'active':''}" onclick="selectedCategory='${c}';render()">${c}</button>`).join('')}</div>
+ <div class="filterbar"><span>시연용 정책 후보 ${arr.length}건</span><button onclick="toast('정렬 기준: 내 조건과 관련된 순서')">관련도순 ⌄</button></div><div id="results">${arr.length?arr.map(card).join(''):'<div class="blank-state">검색 결과가 없어요.<br>다른 키워드나 분야를 선택해 주세요.</div>'}</div>
+ <div class="info-note"><span>ⓘ</span><span>정책의 실제 모집 여부·세부 요건은 해당 기관의 최신 공식 공고에서 최종 확인해야 합니다.</span></div>`}
+function filteredCards(){let arr=policies.filter(p=>(selectedCategory==='전체'||p.cat===selectedCategory)&&(!searchTerm||(`${p.title}${p.cat}${p.reason}`).includes(searchTerm)));return arr.length?arr.map(card).join(''):'<div class="blank-state">검색 결과가 없어요.<br>다른 키워드나 분야를 선택해 주세요.</div>'}
+function openDetail(id){window.selectedPolicy=policies.find(p=>p.id===id)||policies[0];current='detail';render();document.getElementById('screen').scrollTop=0}
+function detail(){let p=window.selectedPolicy||policies[0];return `
+ <button class="editlink" onclick="go('policies')">← 정책 목록으로</button>
+ <div class="detail-hero"><span class="category">${p.org} · ${p.cat} · 시연 데이터</span><h2>${p.title}</h2><p>공식 공고의 조건을 기준으로 내 프로필과 비교하는 화면 예시입니다.</p><div class="hero-meta"><span>나이 ${demoProfile.age}</span><span>학교 천안</span><span>거주 경기</span></div></div>
+ <div class="panel"><div class="status-top"><h3 style="margin:0">내 자격 검토 결과</h3><span class="state check">추가 확인 필요</span></div><p style="font-size:11px;color:#7b879a;line-height:1.5;margin:0 0 11px">현재 입력된 정보만으로는 최종 자격을 확정할 수 없어요. 아래 조건을 확인해 주세요.</p>
+ <div class="eligibility"><div><strong>연령 조건</strong><small>만 23세 · 공고의 연령 기준일 및 연령 범위 확인 필요</small></div><span class="state check">추가 확인</span></div>
+ <div class="eligibility"><div><strong>지역 조건</strong><small>주민등록지 경기 / 학교 소재지 천안 · 거주·재학 인정 범위 확인</small></div><span class="state check">추가 확인</span></div>
+ <div class="eligibility"><div><strong>소득·이력 조건</strong><small>소득 기준 및 과거 수혜 여부 미입력</small></div><span class="state check">추가 확인</span></div>
+ <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:9px"><span style="font-size:10px;color:#7c899d;font-weight:800;margin-right:2px">판정 상태</span><span class="state good">충족</span><span class="state no">미충족</span><span class="state check">추가 확인</span></div>
+ <div class="sourcebox"><b>근거 확인 영역</b><p>실제 연동 시 공식 공고 원문 문장, 기준일, 시행기관 URL을 표시합니다. 현재 화면은 근거 데이터가 연결되지 않은 시연 화면입니다.</p></div></div>
+ <div class="panel"><h3>왜 추가 확인이 필요한가요?</h3><p style="font-size:11px;line-height:1.65;color:#62718a;margin:0">천안에서 학교에 다니더라도 모든 정책이 재학 지역을 인정하는 것은 아닙니다. 공고별로 <b>천안 거주 필수</b>인지, <b>천안 재학·근무 인정</b>인지 확인해야 합니다.</p></div>
+ <button class="primary" onclick="go('apply');toast('신청 준비 목록에 연결했어요.')">신청 준비하기</button><button class="secondary" onclick="go('switch')">생활변화 경로 비교하기</button>
+ <div class="info-note"><span>ⓘ</span><span>청년픽 NEXT는 최종 선정 여부를 보장하지 않습니다. 최종 판단은 시행기관의 최신 공고와 심사 결과를 따릅니다.</span></div>`}
+const profileStates={
+ current:{label:'현재 상태',title:'재학 중 · 경기 거주',residence:'경기도',study:'천안 소재 대학 재학',work:'재학 중',detail:'현재 프로필에 입력된 생활권'},
+ graduate:{label:'졸업 후 구직',title:'졸업 · 구직 중 · 경기 거주',residence:'경기도',study:'졸업',work:'구직 중',detail:'졸업 이후 구직 상태로 변경'},
+ move:{label:'천안 전입',title:'재학 중 · 천안 거주',residence:'천안시',study:'천안 소재 대학 재학',work:'재학 중',detail:'주민등록상 주소지를 천안으로 변경'},
+ graduateMove:{label:'졸업 후 구직 + 천안 전입',title:'졸업 · 구직 중 · 천안 거주',residence:'천안시',study:'졸업',work:'구직 중',detail:'졸업과 천안 전입을 함께 가정'}
+};
+function setRouteState(which,value){if(which==='from')departureState=value;else destinationState=value;render()}
+function swapRouteStates(){const old=departureState;departureState=destinationState;destinationState=old;render()}
+function switchPage(){
+ const from=profileStates[departureState],to=profileStates[destinationState];
+ const diffs=[
+  {name:'주민등록상 주소지',before:from.residence,after:to.residence,changed:from.residence!==to.residence},
+  {name:'학적 상태',before:from.study,after:to.study,changed:from.study!==to.study},
+  {name:'현재 활동 상태',before:from.work,after:to.work,changed:from.work!==to.work}
+ ];
+ const changedCount=diffs.filter(x=>x.changed).length;
+ return `
+ <h1 class="page-title">생활변화 경로</h1><p class="page-sub">출발 상태와 도착 상태를 정하면 조건 차이를 한 화면에서 비교해요.</p>
+ <div class="route-card">
+  <div class="route-title"><strong>내 생활 상태 경로 설정</strong><span>출발 → 도착</span></div>
+  <div class="route-row"><div class="route-rail"><span class="route-dot"></span><span class="route-line"></span></div><div class="route-content"><div class="route-kicker">출발 상태 · FROM</div><select class="route-field" aria-label="출발 상태" onchange="setRouteState('from',this.value)">${Object.entries(profileStates).map(([k,s])=>`<option value="${k}" ${departureState===k?'selected':''}>${s.title}</option>`).join('')}</select><div class="route-desc">${from.detail}</div></div></div>
+  <div class="route-controls"><span class="route-hint">두 상태를 선택하면 비교 결과가 즉시 바뀝니다.</span><button class="route-swap" onclick="swapRouteStates()">⇅ 출발·도착 바꾸기</button></div>
+  <div class="route-row" style="margin-top:10px"><div class="route-rail"><span class="route-dot end"></span></div><div class="route-content end"><div class="route-kicker">도착 상태 · TO</div><select class="route-field" aria-label="도착 상태" onchange="setRouteState('to',this.value)">${Object.entries(profileStates).map(([k,s])=>`<option value="${k}" ${destinationState===k?'selected':''}>${s.title}</option>`).join('')}</select><div class="route-desc">${to.detail}</div></div></div>
+ </div>
+ <div class="route-result"><strong>경로 비교 결과 · ${changedCount}개 항목 변경</strong><p>${from.label}에서 ${to.label}(으)로 상태가 바뀌는 경우를 가정했습니다. 아래에서 변경된 생활 조건과 재검토가 필요한 항목을 확인할 수 있어요.</p></div>
+ <div class="panel"><h3>조건별 변경 내용</h3>${diffs.map(x=>`<div class="diff-row"><div><strong>${x.name}</strong><small>출발: ${x.before}<br>도착: ${x.after}</small></div><span class="diff-pill ${x.changed?'':'same'}">${x.changed?'변경':'동일'}</span></div>`).join('')}</div>
+ <div class="panel"><h3>정책 자격에 미칠 수 있는 영향</h3>
+  <div class="eligibility"><div><strong>지역 요건</strong><small>${from.residence===to.residence?'주소지 변경은 없지만 공고별 지역 인정 기준을 확인해야 합니다.':`${from.residence}에서 ${to.residence}(으)로 변경됩니다. 거주 기준일과 전입일을 대조해야 합니다.`}</small></div><span class="state check">공고별 확인</span></div>
+  <div class="eligibility"><div><strong>학적·취업 요건</strong><small>${from.study===to.study&&from.work===to.work?'학적 및 활동 상태 변화는 없습니다.':`학적은 '${from.study}'에서 '${to.study}'로, 활동 상태는 '${from.work}'에서 '${to.work}'로 바뀝니다.`}</small></div><span class="state check">재검토</span></div>
+  <div class="eligibility"><div><strong>신청 기준일</strong><small>정책마다 기준일이 다르므로 실제 신청 시점과 공고 원문을 함께 확인해야 합니다.</small></div><span class="state check">추가 확인</span></div>
+ </div>
+ <div class="info-note"><span>ⓘ</span><span>이 화면은 현재 입력한 상태와 가정한 상태의 차이를 비교합니다. 변경된 조건에 따라 정책 목록으로 이동하거나 미래의 선정 여부를 자동 확정하지 않습니다.</span></div>`
+}
+const taskList=[
+ {title:'공식 공고·모집 상태 확인',desc:'시행기관의 최신 공고와 모집 여부 확인',file:'공고 확인 기록표.txt',content:'청년픽 NEXT · 공고 확인 기록표\n\n정책명: (직접 입력)\n시행기관: (직접 입력)\n공고 게시일: (직접 입력)\n모집 기간: (공고 원문 확인)\n모집 상태: (모집 중 / 마감 / 예정 / 확인 필요)\n공식 공고 URL: (직접 입력)\n최종 확인일: (직접 입력)\n\n※ 시연용 기록 양식입니다. 공식 공고 원문을 대체하지 않습니다.'},
+ {title:'연령·지역 조건 재확인',desc:'신청 기준일과 생활권 요건 대조',file:'연령·지역 조건 점검표.txt',content:'청년픽 NEXT · 연령·지역 조건 점검표\n\n연령 기준일: (공고 원문 확인)\n신청자 연령: (직접 입력)\n주민등록상 주소지: (직접 입력)\n재학·근무 지역: (직접 입력)\n거주 필수 여부: (공고 원문 확인)\n재학·근무 지역 인정 여부: (공고 원문 확인)\n전입 기준일: (공고 원문 확인)\n\n※ 자격 판정용 공식 문서가 아닌 개인 확인용 양식입니다.'},
+ {title:'재학/졸업 증빙서류 준비',desc:'재학증명서 또는 졸업 관련 서류 등 공고 기준 확인',file:'재학·졸업 증빙서류 안내.txt',content:'청년픽 NEXT · 재학·졸업 증빙서류 안내\n\n확인할 수 있는 서류 예시\n- 재학증명서\n- 졸업증명서\n- 졸업예정증명서\n\n발급 가능 여부와 인정 서류는 정책 공고마다 다릅니다.\n신청 전에 시행기관의 제출서류 항목과 발급일 기준을 확인하세요.\n\n※ 이 파일은 안내문이며 실제 증명서가 아닙니다.'},
+ {title:'소득조건 및 추가 서류 검토',desc:'소득 기준·과거 수혜·제외 조건 점검',file:'소득·추가서류 준비표.txt',content:'청년픽 NEXT · 소득·추가서류 준비표\n\n소득 기준: (공고 원문 확인)\n가구 기준: (공고 원문 확인)\n소득 확인 기준일: (공고 원문 확인)\n과거 수혜 여부: (공고 원문 확인)\n중복수혜 제한: (공고 원문 확인)\n추가 제출서류: (직접 기록)\n\n※ 민감한 소득·재산 정보를 이 파일에 저장하지 마세요. 실제 제출 방식은 공식 기관 안내를 따르세요.'},
+ {title:'공식 신청 페이지 제출',desc:'공식 신청 페이지에서 최종 제출',file:'최종 제출 확인표.txt',content:'청년픽 NEXT · 최종 제출 확인표\n\n□ 공식 신청 페이지 주소 확인\n□ 신청 기간 내 제출 여부 확인\n□ 필수 입력 항목 확인\n□ 첨부파일 형식·용량 확인\n□ 제출 완료 화면 또는 접수번호 확인\n□ 접수 내역 보관\n\n※ 실제 신청·제출은 반드시 시행기관의 공식 홈페이지에서 진행하세요.'}
+];
+function saveToWallet(i){walletSaved.add(i);render();toast('전자지갑에 파일을 보관했어요.')}
+function removeWalletFile(i){walletSaved.delete(i);render();toast('전자지갑에서 파일을 제거했어요.')}
+function downloadTaskFile(i){
+ const item=taskList[i];
+ const blob=new Blob(['\ufeff'+item.content],{type:'text/plain;charset=utf-8'});
+ const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=item.file;document.body.appendChild(a);a.click();a.remove();window.setTimeout(()=>URL.revokeObjectURL(url),1000);
+ toast('파일 다운로드를 시작했어요.');
+}
+function walletPanel(){
+ const saved=[...walletSaved].sort((a,b)=>a-b);
+ return `<div class="wallet-panel"><div class="wallet-head"><strong>▣ 내 전자지갑</strong><span>${saved.length}개 보관</span></div>${saved.length?saved.map(i=>`<div class="wallet-file"><span class="file-icon">▤</span><div class="file-meta"><strong>${taskList[i].file}</strong><small>${taskList[i].title} · 시연용 안내 파일</small></div><button class="file-action" onclick="downloadTaskFile(${i})">다운로드</button><button class="file-action" onclick="removeWalletFile(${i})">삭제</button></div>`).join(''):`<div class="wallet-empty">아직 보관한 파일이 없어요.<br>아래 체크리스트에서 필요한 파일을 전자지갑에 담아보세요.</div>`}<p class="wallet-sub">전자지갑에 보관한 항목은 이 시연 화면을 켜 둔 동안 목록에 표시됩니다.</p></div>`
+}
+function applyPage(){let done=completed.size;return `
+ <h1 class="page-title">신청 준비 관리</h1><p class="page-sub">체크리스트를 확인하고 관련 안내 파일을 전자지갑에 보관해요.</p>
+ <div class="panel"><div class="status-top"><strong>청년 주거 지원 정책 · 시연 데이터</strong><span class="demo-tag">샘플 체크리스트</span></div><div style="display:flex;align-items:end;justify-content:space-between"><div><b style="font-size:25px;color:#1f3152">${done}<span style="font-size:13px;color:#8994a6"> / 5</span></b><div style="font-size:10px;color:#8994a6;margin-top:2px">준비 단계 완료</div></div><b style="color:#2868f5;font-size:12px">${Math.round(done/5*100)}%</b></div><div style="height:7px;background:#edf1f6;border-radius:9px;margin-top:11px;overflow:hidden"><div style="height:100%;width:${done/5*100}%;background:#2868f5;border-radius:9px"></div></div></div>
+ ${walletPanel()}
+ <div class="panel"><h3>내 준비 체크리스트</h3>${taskList.map((t,i)=>`<div class="task"><input type="checkbox" id="task${i}" ${completed.has(i)?'checked':''} onchange="toggleTask(${i},this.checked)"><label for="task${i}"><strong>${t.title}</strong><small>${t.desc}</small></label><span class="taskstate ${completed.has(i)?'done':(i===2?'progress':'')}">${completed.has(i)?'완료':(i===2?'준비 중':'미완료')}</span></div><div class="task-doc"><span class="file-icon">▤</span><div class="file-meta"><strong>${t.file}</strong><small>${walletSaved.has(i)?'전자지갑에 보관됨':'관련 안내 파일 · TXT'}</small></div><div class="doc-actions"><button class="save-file" onclick="saveToWallet(${i})">${walletSaved.has(i)?'보관됨':'지갑 보관'}</button><button class="download-file" onclick="downloadTaskFile(${i})">받기</button></div></div>`).join('')}</div>
+ <div class="panel"><h3>함께 확인할 사항</h3><div class="eligibility"><div><strong>공고별 제출서류</strong><small>시행기관 공고 원문과 대조</small></div><span class="state check">확인 필요</span></div><div class="eligibility"><div><strong>마감 일정</strong><small>공고 변경 시 일정 재확인</small></div><span class="state check">확인 필요</span></div><div class="eligibility"><div><strong>중복수혜 제한</strong><small>다른 지원사업 참여 이력 점검</small></div><span class="state check">확인 필요</span></div></div>
+ <button class="primary" onclick="toast('체크리스트 상태를 이 화면에 반영했어요.')">준비 현황 저장</button>
+ <div class="info-note"><span>ⓘ</span><span>다운로드 파일은 시연용 안내·점검 양식이며 실제 증명서, 공식 공고문 또는 신청서가 아닙니다. 개인 증빙서류의 업로드·암호화 보관·기관 제출 연동은 아직 구현하지 않았습니다.</span></div>`}
+function profilePage(){return `
+ <h1 class="page-title">내 프로필</h1><p class="page-sub">정책 자격 검토에 필요한 최소 정보만 구분해서 입력해요.</p>
+ <div class="panel"><h3>기본 정보</h3><label class="fieldlabel">연령</label><input class="field" value="만 23세"/><label class="fieldlabel">주민등록상 주소지</label><input class="field" value="경기도"/><label class="fieldlabel">학교 소재지</label><input class="field" value="천안시"/><label class="fieldlabel">현재 상태</label><select class="field"><option>대학 재학</option><option>졸업</option><option>구직 중</option><option>재직 중</option><option>창업</option></select></div>
+ <div class="panel"><h3>관심 분야</h3><div class="chips"><button class="chip active" onclick="this.classList.toggle('active')">일자리</button><button class="chip active" onclick="this.classList.toggle('active')">주거</button><button class="chip active" onclick="this.classList.toggle('active')">교육</button><button class="chip" onclick="this.classList.toggle('active')">창업</button></div></div>
+ <div class="info-note"><span>ⓘ</span><span>거주지와 학교·근무 지역을 별도 항목으로 관리합니다. 소득·재산 정보는 자동으로 확정하지 않고, 필요한 경우 추가 확인 항목으로 다룹니다.</span></div>
+ <button class="primary" onclick="toast('프로필 입력 예시를 확인했습니다.')">입력 정보 확인</button>`}
+function toggleTask(i,checked){if(checked)completed.add(i);else completed.delete(i);render()}
+function render(){const screen=document.getElementById('screen');const pages={home,policies:policiesPage,detail,switch:switchPage,apply:applyPage,profile:profilePage};screen.innerHTML=(pages[current]||home)();document.querySelectorAll('.navitem').forEach(b=>b.classList.toggle('active',b.dataset.nav===(current==='detail'?'policies':current)));}
+render();
+</script>
+</body>
+</html>
